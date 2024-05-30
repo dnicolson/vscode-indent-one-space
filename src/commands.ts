@@ -32,6 +32,13 @@ function indentOneSpace(editor: TextEditor, isReverse: boolean) {
 		commands.executeCommand('type', { text: ' ' });
 		return;
 	}
+
+	const textSelections = editor.selections.map(editor.document.getText);
+	if (new Set(textSelections).size === 1) {
+		commands.executeCommand('type', { text: ' ' });
+		return;
+	}
+
 	const newSelections: Selection[] = [];
 
 	editor.edit(builder => {
